@@ -13,6 +13,7 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '8181');
+console.log('App running on localhost ', port);
 app.set('port', port);
 
 /**
