@@ -5,7 +5,7 @@ const userRepo = require('../repos/user');
 router.get('/', (req, res) => {
   userRepo.getUsers(result => {
     res.render('users', 
-      {users: result.data, message: result.err });
+      { users: result.data, message: result.err });
   });
 });
 
@@ -16,14 +16,14 @@ router.get('/new', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   userRepo.getUser(id, result => {
-    res.render('users/show', {user: result.data});
+    res.render('users/show', { user: result.data });
   });
 });
 
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
   userRepo.getUser(id, result => {
-    res.render('users/edit', {user: result.data});
+    res.render('users/edit', { user: result.data });
   });
 });
 
