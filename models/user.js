@@ -22,6 +22,12 @@ const UserSchema = mongoose.Schema({
       message: 'Password must be valid length'
     }
   },
+  slips: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Slip'
+    }
+  ]
 });
 
 UserSchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
