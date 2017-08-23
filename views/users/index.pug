@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1 
+    a(href="/users") Users
+
+  - if (users) {
+  ul
+    for user in users
+      a(href="/users/" + user._id) 
+        li= user
+  - }
+
+  a(href="/users/new") new user
+
+

@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #666;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.flash-message {
+  padding: 5px;
+  border: 1px solid #666;
+  cursor: pointer;
+}

@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1 
+    a(href="/users") Users
+
+  form#user-new(method='POST', action='/users/new')
+    label(for='email') Email
+    input#email(type='email', name='email')
+    label(for='password') Password
+    input#password(type='password', name='password')
+    input(type='submit')
+
