@@ -11,13 +11,21 @@ const SlipSchema = new mongoose.Schema({
       message: 'Language must be valid length'
     }
   },
-  sub_languages: [String],
+  sub_languages: String,
   study_type: {
     type: String,
     validate: {
       validator: (study_type) => 
       study_type.length > 1 && study_type.length < 100,
       message: 'Study type must be valid length'
+    }
+  },
+  resource_type: {
+    type: String,
+    validate: {
+      validator: (resource_type) => 
+      resource_type.length > 1 && resource_type.length < 100,
+      message: 'Resource type must be valid length'
     }
   },
   resource_title: {

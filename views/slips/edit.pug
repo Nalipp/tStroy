@@ -2,12 +2,46 @@ extends ../layout
 
 block content
   h1 
-    a(href="/slips") Slips
+    a(href="/slips") Time Slip
 
-  form(method='POST', action='/slips/' + slip._id)
-    label(for='email') Email
-    input(type='email', name='email' value=slip.email)
-    label(for='password') Password
-    input(type='password' password='password' value=slip.password)
+  form#slip-new(method='POST', action='/slips/' + slip._id)
+    label(for='language') Language
+    input#language(type='text', 
+                   name='language',
+                   value=slip.language)
+
+    label(for='sub_languages') Sub language (framework)
+    input#sub_language(type='text', 
+                       name='sub_languages',
+                       value=slip.sub_language)
+
+    label(for='resource_title') Resource type
+    input#resource_type(type='text', 
+                        name='resource_type',
+                        value=slip.resource_type)
+
+    label(for='resource_title') Resource title
+    input#resource_title(type='text', 
+                         name='resource_title',
+                         value=slip.resource_title)
+
+    label(for='description') Description
+    textarea#description(name='description') #{slip.description}
+
+    label(for='url') Url
+    input#url(type='text', 
+              name='url'
+              value=slip.url)
+
+    label(for='minutes') Minutes
+    input#minutes(type='number', 
+                  name='minutes'
+                  value=slip.minutes)
+
+    label(for='date') Date
+    input#date(type='date', 
+               name='date',
+               value=slip.date)
+
     input(type='submit')
 
