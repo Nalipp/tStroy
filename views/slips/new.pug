@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1 
+    a(href="/slips") Slips
+
+  form#slip-new(method='POST', action='/slips/new')
+    label(for='email') Email
+    input#email(type='email', name='email')
+    label(for='password') Password
+    input#password(type='password', name='password')
+    input(type='submit')
+

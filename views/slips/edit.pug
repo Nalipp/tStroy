@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1 
+    a(href="/slips") Slips
+
+  form(method='POST', action='/slips/' + slip._id)
+    label(for='email') Email
+    input(type='email', name='email' value=slip.email)
+    label(for='password') Password
+    input(type='password' password='password' value=slip.password)
+    input(type='submit')
+

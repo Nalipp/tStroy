@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1 
+    a(href="/slips") Slips
+
+  - if (slips) {
+  ul
+    for slip in slips
+      a(href="/slips/" + slip._id) 
+        li= slip
+  - }
+
+  a(href="/slips/new") new slip
+
+
