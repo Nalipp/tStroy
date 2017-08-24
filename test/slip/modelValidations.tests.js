@@ -45,24 +45,6 @@ describe('validates Slip model', () => {
     assert(message === 'Sub languages must be less than 200 characters total');
   });
 
-  it('Should validate Study_type length < 100', () => {
-    const slip = new Slip({
-      study_type: 'a'.repeat(100),
-    });
-    const validationResult = slip.validateSync();
-    const { message } = validationResult.errors.study_type;
-    assert(message === 'Study type is too long');
-  });
-
-  it('Should validate Resource_type length < 100', () => {
-    const slip = new Slip({
-      resource_type: 'a'.repeat(100),
-    });
-    const validationResult = slip.validateSync();
-    const { message } = validationResult.errors.resource_type;
-    assert(message === 'Resource type is too long');
-  });
-
   it('Should validate Resource_title length < 100', () => {
     const slip = new Slip({
       resource_title: 'a'.repeat(100),

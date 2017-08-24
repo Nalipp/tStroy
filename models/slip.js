@@ -25,13 +25,6 @@ const SlipSchema = new mongoose.Schema({
       message: 'Study type is too long'
     }
   },
-  resource_type: {
-    type: String,
-    validate: {
-      validator: (resource_type) => resource_type.length < 100,
-      message: 'Resource type is too long'
-    }
-  },
   resource_title: {
     type: String,
     validate: {
