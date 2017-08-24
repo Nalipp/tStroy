@@ -13,6 +13,10 @@ router.get('/new', (req, res) => {
   res.render('users/new');
 });
 
+router.get('/login', (req, res) => {
+  res.render('users/login');
+});
+
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   userRepo.getUser(id, result => {
