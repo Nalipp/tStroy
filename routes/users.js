@@ -1,57 +1,84 @@
-const express = require('express');
-const router = express.Router();
 const userRepo = require('../repos/user');
 
-router.get('/', (req, res) => {
-  userRepo.getUsers(result => {
-    res.render('users', 
-      { users: result.data, message: result.err });
+module.exports = function(app, passport) {
+
+  app.get('/', (req, res) => {
+    res.render('/', { user: req.user });
   });
-});
 
-router.get('/new', (req, res) => {
-  res.render('users/new');
-});
-
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  userRepo.getUser(id, result => {
-    res.render('users/show', { user: result.data });
+  app.get('/users', (req, res) => {
+    userRepo.getUsers(result => {
+      res.render('users/index', 
+        { users: result.data, message: result.err });
+    });
   });
-});
 
-router.get('/edit/:id', (req, res) => {
-  const id = req.params.id;
-  userRepo.getUser(id, result => {
-    res.render('users/edit', { user: result.data });
+  app.get('/users/new', (req, res) => {
+    res.render('users/new', { message: req.flash('signupMessage') });
   });
-});
 
-router.post('/new', (req, res) => {
-  userRepo.createUser(req.body, result => {
-    if (result.err) res.render('users/new', 
-      { message: result.err });
-    else
-    res.redirect('/users');
+  app.post('/users/new', passport.authenticate('local-signup', {
+    successRedirect : '/',
+    failureRedirect : '/users/new',
+    failureFlash : true
+  }));
+
+  app.get('/users/login', (req, res) => {
+    res.render('users/login', { message: req.flash('loginMessage') });
   });
-});
 
-router.post('/:id', (req, res) => {
-  const id = req.params.id;
-  const update = req.body;
-  userRepo.updateUser(id, update, (result) => {
-    if (result.err)
-      res.render('users/' + id, 
-        { message: result.err })
-    else res.redirect('/users/' + id) 
+	app.post('/users/login', passport.authenticate('local-login', {
+		successRedirect : '/',
+		failureRedirect : '/users/login',
+		failureFlash : true
+	}));
+
+  app.get('/users/logout', (req, res, next) => {
+    req.logout();
+    req.session.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
   });
-});
 
-router.post('/delete/:id', (req, res) => {
-  const id = req.params.id
-  userRepo.deleteUser(id, () => {
-    res.render('users', { message: 'Profile was delted' });
+  app.get('/users/:id', (req, res) => {
+    const id = req.params.id;
+    userRepo.getUser(id, result => {
+      res.render('users/show', { user: result.data });
+    });
   });
-});
 
-module.exports = router;
+  app.get('/users/edit/:id', isLoggedIn, (req, res) => {
+    const id = req.params.id;
+    userRepo.getUser(id, result => {
+      res.render('users/edit', { user: result.data });
+    });
+  });
+
+  app.post('/users/:id', isLoggedIn, (req, res) => {
+    const id = req.params.id;
+    const update = req.body;
+
+    if(req.user.id === id) {
+      userRepo.updateUser(id, update, (result) => {
+        if (result.err) return res.render('users/' + id, { message: result.err })
+        else res.redirect('/users/' + id) 
+      });
+    }
+  });
+
+  app.post('/users/delete/:id', (req, res) => {
+    const id = req.params.id
+    userRepo.deleteUser(id, () => {
+      res.render('users/home', 
+        { message: 'Profile was delted' });
+    });
+  });
+
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/');
+  }
+}

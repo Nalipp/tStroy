@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+
+  h1 Tstory
+  h4 Track and show off the history of your hard work
+
+  if (!user)
+    a(href="/users/login") Login
+    br
+    a(href="/users/new") sign up
+  if (user)
+    p You are currently logged in as #{ user.email }
+    a(href="/users/logout") Logout
+  
+    p
+      a(href="/users/" + user._id) #{user}

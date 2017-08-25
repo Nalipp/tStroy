@@ -4,12 +4,11 @@ block content
   h1 
     a(href="/users") Users
 
-  - if (user) {
-  p #{user}
+  if(user) 
+    p= user
 
-  a(href="/users/edit/" + user._id) edit
-  form(method="Post" action="/users/delete/" + user._id) 
-    button(type="submit") delete
-  - }
+    a(href="/users/edit/" + user._id) edit
+    form(method="Post" action="/users/delete/" + user._id) 
+      button(type="submit") delete
 
-  
+    
