@@ -2,9 +2,10 @@ const userRepo = require('../repos/user');
 
 module.exports = function(app, passport) {
 
-  app.get('/', (req, res) => {
-    res.render('/', { user: req.user });
-  });
+  // app.get('/', (req, res) => {
+  //   res.render('/', 
+  //     { user: req.user, message: req.flash('loginMessage') });
+  // });
 
   app.get('/users', (req, res) => {
     userRepo.getUsers(result => {

@@ -6,7 +6,9 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     if(message)
-      p.flash-message= message
+      for mess in message
+        p.flash-message= mess
+
 
     if (error && error.length > 0)
       br
