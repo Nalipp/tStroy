@@ -33,12 +33,20 @@ module.exports = function(app, passport) {
 		failureFlash : true
 	}));
 
+  app.get('/users/update_password', isLoggedIn, (req, res) => {
+    res.render('users/update_password', { user: req.user });
+  });
+
+  app.post('/users/update_password', passport.authenticate('local-password-update', {
+    successRedirect : '/',
+    failureRedirect : '/users/update_password',
+    requireFlash : true
+  }));
+
   app.get('/users/logout', (req, res, next) => {
     req.logout();
     req.session.save((err) => {
-      if (err) {
-        return next(err);
-      }
+      if (err) return next(err);
       res.redirect('/');
     });
   });
