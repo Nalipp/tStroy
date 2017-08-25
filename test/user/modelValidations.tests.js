@@ -11,7 +11,7 @@ describe('validates User model', () => {
 
   it('Should validate Email as unique', (done) => {
     const user1 = new User({ 
-      email: 'm@mail.com',
+     email: 'm@mail.com',
       password: 'password'
     });
     const user2 = new User({ 
