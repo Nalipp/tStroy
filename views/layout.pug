@@ -5,15 +5,8 @@ html
     meta(name='viewport', content='width=device-width')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    if(message)
-      for mess in message
-        p.flash-message= mess
-
-
-    if (error && error.length > 0)
-      br
-      h4.error-msg= error
-      br
+    
+    p.flash-message= message
 
     block content
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")

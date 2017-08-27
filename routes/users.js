@@ -2,11 +2,6 @@ const userRepo = require('../repos/user');
 
 module.exports = function(app, passport) {
 
-  // app.get('/', (req, res) => {
-  //   res.render('/', 
-  //     { user: req.user, message: req.flash('loginMessage') });
-  // });
-
   app.get('/users', (req, res) => {
     userRepo.getUsers(result => {
       res.render('users/index', 
@@ -25,6 +20,7 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/users/login', (req, res) => {
+    console.log('im here'); 
     res.render('users/login', { message: req.flash('loginMessage') });
   });
 
@@ -38,7 +34,8 @@ module.exports = function(app, passport) {
     res.render('users/update_password', { user: req.user });
   });
 
-  app.post('/users/update_password', passport.authenticate('local-password-update', {
+  app.post('/users/update_password', 
+    passport.authenticate('local-password-update', {
     successRedirect : '/',
     failureRedirect : '/users/update_password',
     requireFlash : true
@@ -48,7 +45,8 @@ module.exports = function(app, passport) {
     req.logout();
     req.session.save((err) => {
       if (err) return next(err);
-      res.redirect('/');
+      res.render('users/home', 
+        { message: 'You are now logged out' });
     });
   });
 
@@ -84,7 +82,7 @@ module.exports = function(app, passport) {
     const id = req.params.id
     userRepo.deleteUser(id, () => {
       res.render('users/home', 
-        { message: 'Profile was delted' });
+        { message: 'Profile was deleted' });
     });
   });
 

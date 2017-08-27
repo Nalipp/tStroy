@@ -64,7 +64,7 @@ module.exports = function(passport) {
           user.password = user.generateHash(password);
           user.save(function(err) {
             if (err) throw err;
-            return done(null, user);
+            return done(null, user, req.flash('passwordUpdateMessage', 'Password has been updated'));
           });
     });
   }));
