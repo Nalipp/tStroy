@@ -22,15 +22,14 @@ module.exports = function(passport) {
         User.findOne({ 'email' :  email }, function(err, user) {
           if (err) return done(err);
           if (user) {
-            return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            return done(null, false, req.flash('signupError', 'That email is already taken.'));
           } else {
             var newUser      = new User();
             newUser.email    = email;
             newUser.password = newUser.generateHash(password);
             newUser.save(function(err) {
-              if (err)
-                throw err;
-              return done(null, newUser, req.flash('signupMessage', 'Signup successful'));
+              if (err) throw err;
+              return done(null, newUser);
             });
           }
         });    
@@ -45,11 +44,12 @@ module.exports = function(passport) {
     function(req, email, password, done) {
       User.findOne({ 'email' :  email }, function(err, user) {
         if (err) return done(err);
-        if (!user)
-          return done(null, false, req.flash('loginMessage', 'No user found.'));
-        if (!user.validPassword(password))
-          return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-        return done(null, user, req.flash('loginMessage', 'Loggin successful.'));
+        if (!user) 
+          return done(null, false, req.flash('loginError', 'Incorrect username or password'));
+        if (!user.validPassword(password)) {
+          return done(null, false, req.flash('loginError', 'Incorrect username or password'));
+        }
+        return done(null, user);
       });
     }));
   
@@ -64,7 +64,7 @@ module.exports = function(passport) {
           user.password = user.generateHash(password);
           user.save(function(err) {
             if (err) throw err;
-            return done(null, user, req.flash('passwordUpdateMessage', 'Password has been updated'));
+            return done(null, user, req.flash('updatePasswordSuccess', 'Password updated successfully'));
           });
     });
   }));

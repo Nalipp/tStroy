@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  let message;
-  message = req.flash('loginMessage'); 
-  message = req.flash('passwordUpdateMessage'); 
-  message = req.flash('signupMessage');
+  const flashMessage = req.flash('updatePasswordSuccess');
+  const message = (flashMessage.length > 0) ? flashMessage : null; 
   res.render('users/home', 
-    { user: req.user, message: message });
+    { user: req.user, successMessage: message });
 });
 
 module.exports = router;

@@ -6,7 +6,17 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     
-    p.flash-message= message
+    if(successMessage)
+      .flash-message 
+        p.success-message= successMessage
+
+    if(errorMessage)
+      .flash-message 
+        p.error-message= errorMessage
+
+    if(infoMessage)
+      .flash-message 
+        p.info-message= infoMessage
 
     block content
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")

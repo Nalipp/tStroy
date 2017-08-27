@@ -9,11 +9,38 @@ body {
 a {
   color: #00B7FF;
 }
+
 .flash-message {
-  padding: 5px;
-  border: 1px solid #666;
+  position: relative;
   cursor: pointer;
 }
+
+.flash-message::after {
+  position: absolute;
+  content: 'x';
+  top: -2px;
+  right: 6px;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.success-message, .error-message, .info-message {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.success-message {
+  background-color: #DFF2BF;
+}
+
+.error-message {
+  background-color: #FFBABA;
+}
+
+.info-message {
+  background-color: #BDE5F8;
+}
+
 input, textarea {
   display: block;
   margin: 10px 0;
@@ -24,7 +51,6 @@ input, textarea {
   width: 280px;
   box-sizing: border-box;
 }
-
 input[type="submit"] {
   border-radius: 6px;
   border: 2px solid #00B7ff;
@@ -32,16 +58,13 @@ input[type="submit"] {
   color: #00B7ff;
   cursor: pointer;
 }
-
 textarea {
   height: 60px;
 }
-
 input#url, textarea {
   font-size: 12px;
   padding: 6px;
 }
-
 input::placeholder {
   color: #bbb;
 }
@@ -54,11 +77,9 @@ input::placeholder {
   margin: 10% auto 0 auto;
   text-align: center; 
 }
-
 .index h1, .index h4, .index input[type="submit"] {
   padding: 10px;
 }
-
 .index input[type="submit"] {
   width: 60%;
   margin: 0 auto;

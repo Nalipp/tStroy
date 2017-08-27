@@ -5,12 +5,14 @@ module.exports = function(app, passport) {
   app.get('/users', (req, res) => {
     userRepo.getUsers(result => {
       res.render('users/index', 
-        { users: result.data, message: result.err });
+        { users: result.data, message: 'Something went wrong' });
     });
   });
 
   app.get('/users/new', (req, res) => {
-    res.render('users/new', { message: req.flash('signupMessage') });
+    const flashMessage = req.flash('signupError');
+    const message = (flashMessage.length > 0) ? flashMessage : null; 
+    res.render('users/new', { errorMessage: message });
   });
 
   app.post('/users/new', passport.authenticate('local-signup', {
@@ -20,8 +22,9 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/users/login', (req, res) => {
-    console.log('im here'); 
-    res.render('users/login', { message: req.flash('loginMessage') });
+    const flashMessage = req.flash('loginError');
+    const message = (flashMessage.length > 0) ? flashMessage : null;
+    res.render('users/login', { errorMessage: message });
   });
 
 	app.post('/users/login', passport.authenticate('local-login', {
@@ -46,7 +49,7 @@ module.exports = function(app, passport) {
     req.session.save((err) => {
       if (err) return next(err);
       res.render('users/home', 
-        { message: 'You are now logged out' });
+        { infoMessage: 'You are now logged out' });
     });
   });
 
@@ -70,7 +73,7 @@ module.exports = function(app, passport) {
     if(req.user.id === id) {
       userRepo.updateUser(id, update, (result) => {
         if (result.err) return res.render('users/' + id, 
-          { message: result.err })
+          { errorMessage: 'Something went wrong' })
         else res.redirect('/users/' + id) 
       });
     } else {
@@ -82,7 +85,7 @@ module.exports = function(app, passport) {
     const id = req.params.id
     userRepo.deleteUser(id, () => {
       res.render('users/home', 
-        { message: 'Profile was deleted' });
+        { infoMessage: 'Profile was deleted' });
     });
   });
 
