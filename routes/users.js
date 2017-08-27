@@ -65,12 +65,10 @@ module.exports = function(app, passport) {
 
   });
 
-  // new form 
   app.get('/users/:id/slips/new', (req, res) => {
     res.render('slips/new', { userId: req.params.id });
   });
 
-  // new post
   app.post('/users/:id/slips/new', isLoggedIn, (req, res) => {
     const newSlip = req.body;
     const id = req.params.id
