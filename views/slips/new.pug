@@ -4,9 +4,7 @@ block content
   h1 
     a(href="/slips") Slips
 
-  form#slip-new(method='POST', action='/slips/new')
-    input(type='hidden', name='user', value=userId)
-
+  form#slip-new(method='POST', action='/users/' + userId + '/slips/new')
     label(for='language') Language
     input#language(type='text', 
                    name='language' 

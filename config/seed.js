@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/tstoryDev', err => {
 
 const usersArr = [
   {
-    email: 'jane@mail.com',
+    email: '1@mail.com',
     password: 'password'
   }, 
   {
@@ -469,26 +469,30 @@ const slipsArr = [
 ]
 
 
-const { users, slips } = mongoose.connection.collections;
+const { users } = mongoose.connection.collections;
 users.drop(() => {
-  slips.drop(() => {
 
-    userRepo.createUser(usersArr, results => {
-      const userOneId = results.data[0]._id
-      const userTwoId = results.data[1]._id
+  userRepo.createUser(usersArr, () => {
+    userRepo.getUsers((results) => {
+      const user1 = results.data[0];
+      const user2 = results.data[1];
 
       for (let i = 0; i < slipsArr.length; i++) {
-        console.log(i);
         if (i < 20) {
-          slipsArr[i].user = userOneId;
+          user1.slips.push(slipsArr[i]);
         }
         if (i > 20) {
-          slipsArr[i].user = userTwoId;
+          user2.slips.push(slipsArr[i]);
         }
-        if (i === slipsArr.length - 1) {
-          slipRepo.createSlip(slipsArr, results => {
-            console.log(results.data); 
-            mongoose.disconnect();
+        if (i === slipsArr.length -1) {
+          userRepo.updateUser(user1._id, user1, () => {
+            userRepo.updateUser(user2._id, user2, () => {
+              userRepo.getUsers((results) => {
+                console.log(results.data[0].slips);
+                console.log(results.data[1].slips);
+                mongoose.disconnect();
+              });
+            });
           });
         }
       }

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-// const passportLocalMongoose = require('passport-local-mongoose');
 const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator')
-var bcrypt   = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
+const slipSchema = require('./slip');
 
 const UserSchema = mongoose.Schema({
   email: {
@@ -24,12 +24,13 @@ const UserSchema = mongoose.Schema({
       message: 'Password must be valid length'
     }
   },
-  slips: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Slip'
-    }
-  ]
+  // slips: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'Slip'
+  //   }
+  // ]
+  slips: [slipSchema]
 });
 
 UserSchema.methods.generateHash = function(password) {

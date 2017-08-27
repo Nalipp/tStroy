@@ -71,7 +71,22 @@ module.exports = function(app, passport) {
   });
 
   // new post
-  app.post('/users/:id/slips/new', (req, res) => {
+  app.post('/users/:id/slips/new', isLoggedIn, (req, res) => {
+    const newSlip = req.body;
+    const id = req.params.id
+
+    if(req.user.id === id) {
+      userRepo.getUser(id, user => {
+      user.data.slips.push(newSlip);
+        userRepo.updateUser(id, user.data, (result) => {
+          if (result.err) return res.render('users/' + id, 
+            { errorMessage: 'Something went wrong' })
+          else res.redirect('/users/' + id) 
+        });
+      });
+    } else {
+      res.redirect('/');
+    }
   });
 
   app.get('/users/edit/:id', isLoggedIn, (req, res) => {

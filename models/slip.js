@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const SlipSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
-  },
   language: {
     type: String, 
     required: [true, 'Language is required'],
@@ -54,6 +50,6 @@ const SlipSchema = new mongoose.Schema({
   date: Date
 });
 
-const Slip = mongoose.model('Slip', SlipSchema)
+// const Slip = mongoose.model('Slip', SlipSchema)
 
-module.exports = Slip;
+module.exports = SlipSchema;

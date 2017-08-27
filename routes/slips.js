@@ -28,9 +28,6 @@ router.get('/edit/:id', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
-  console.log('Post slips/new............');
-  console.log('req.body.............');
-  console.log(req.body);
   slipRepo.createSlip(req.body, result => {
     if (result.err) res.render('slips/new', 
       { message: result.err });
