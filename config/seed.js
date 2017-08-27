@@ -1,6 +1,7 @@
 const userRepo = require('../repos/user');
 const slipRepo = require('../repos/slip');
 const mongoose = require('mongoose');
+const objectId = require('mongoose').ObjectId;
 
 /* eslint-disable no-console */
 
@@ -473,14 +474,25 @@ users.drop(() => {
   slips.drop(() => {
 
     userRepo.createUser(usersArr, results => {
-      console.log(results.data);
-      slipRepo.createSlip(slipsArr, results => {
-        console.log(results.data); 
-        mongoose.disconnect();
-      });
+      const userOneId = results.data[0]._id
+      const userTwoId = results.data[1]._id
+
+      for (let i = 0; i < slipsArr.length; i++) {
+        console.log(i);
+        if (i < 20) {
+          slipsArr[i].user = userOneId;
+        }
+        if (i > 20) {
+          slipsArr[i].user = userTwoId;
+        }
+        if (i === slipsArr.length - 1) {
+          slipRepo.createSlip(slipsArr, results => {
+            console.log(results.data); 
+            mongoose.disconnect();
+          });
+        }
+      }
     });
-
-
   });
 });
 

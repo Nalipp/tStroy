@@ -60,6 +60,20 @@ module.exports = function(app, passport) {
     });
   });
 
+  // get slips 
+  app.get('/users/:id/slips', (req, res) => {
+
+  });
+
+  // new form 
+  app.get('/users/:id/slips/new', (req, res) => {
+    res.render('slips/new', { userId: req.params.id });
+  });
+
+  // new post
+  app.post('/users/:id/slips/new', (req, res) => {
+  });
+
   app.get('/users/edit/:id', isLoggedIn, (req, res) => {
     const id = req.params.id;
     userRepo.getUser(id, result => {

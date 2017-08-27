@@ -5,6 +5,8 @@ block content
     a(href="/slips") Slips
 
   form#slip-new(method='POST', action='/slips/new')
+    input(type='hidden', name='user', value=userId)
+
     label(for='language') Language
     input#language(type='text', 
                    name='language' 
@@ -15,9 +17,9 @@ block content
                    name='sub_languages',
                    placeholder='node.js, react')
 
-    label(for='resource_title') Resource type
-    input#resource_type(type='text', 
-                        name='resource_type',
+    label(for='study_type') Resource type
+    input#study_type(type='text', 
+                        name='study_type',
                         placeholder='book')
 
     label(for='resource_title') Resource title
