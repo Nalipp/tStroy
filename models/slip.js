@@ -50,6 +50,25 @@ const SlipSchema = new mongoose.Schema({
   date: Date
 });
 
+SlipSchema.virtual('totalHours').get(function() {
+  const totalMinutes = this.minutes
+  if (totalMinutes) {
+    const hours = Math.floor(totalMinutes / 60);
+    const mins = totalMinutes % 60;
+    return (mins > 0) ? hours + ':' + mins : hours;
+  }
+  else return null;
+});
+
+SlipSchema.virtual('formatedDate').get(function() {
+  if (this.date) {
+    var month = this.date.getUTCMonth() + 1; //months from 1-12
+    var day = this.date.getUTCDate();
+    var year = this.date.getUTCFullYear();
+    return month + '/' + day + '/' + year;
+  }
+  else return null;
+});
 // const Slip = mongoose.model('Slip', SlipSchema)
 
 module.exports = SlipSchema;

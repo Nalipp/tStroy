@@ -53,16 +53,19 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/users/:id', (req, res) => {
+  app.get('/users/:id/', (req, res) => {
     const id = req.params.id;
     userRepo.getUser(id, result => {
       res.render('users/show', { user: result.data });
     });
   });
 
-  // get slips 
-  app.get('/users/:id/slips', (req, res) => {
+  function convertHours(minutes) {
+    const hours = Math.floor(minutes / 60);
+    return hours + ':' + minutes % 60;
+  }
 
+  app.get('/users/:id/slips', (req, res) => {
   });
 
   app.get('/users/:id/slips/new', (req, res) => {
