@@ -48,15 +48,13 @@ module.exports = function(app, passport) {
     req.logout();
     req.session.save((err) => {
       if (err) return next(err);
-      res.render('users/home', 
-        { infoMessage: 'You are now logged out' });
+      res.redirect('/users');
     });
   });
 
   app.get('/users/:id/', (req, res) => {
     const id = req.params.id;
     userRepo.getUser(id, result => {
-      result.data.description = 'hi';
       res.render('users/show', { user: result.data });
     });
   });

@@ -1,10 +1,24 @@
 /* ************************************************** */
 /* main */
 /* ************************************************** */
+
+* {padding: 0; margin: 0;}
+
+nav {
+  background: #7bc7ff;
+  padding: 10px;
+  color: #fff;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #666;
+}
+main {
+  margin: 50px;
+}
+a, h1, h2, h3, h4, p {
+  padding: 4px;
 }
 a {
   color: #7bc7ff;
@@ -68,6 +82,26 @@ input#url, textarea {
 input::placeholder {
   color: #bbb;
 }
+
+/* ************************************************** */
+/* nav */
+/* ************************************************** */
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+nav h1 {
+  display: inline-block;
+}
+nav h4 {
+  display: inline-block;
+  float: right;
+  text-transform: lowercase;
+  padding-left: 14px;
+}
+
+
 /* ************************************************** */
 /* index page */
 /* ************************************************** */
@@ -87,18 +121,6 @@ input::placeholder {
 /* ************************************************** */
 /* user show page */
 /* ************************************************** */
-
-/* #fff57b /1* yellow *1/ */
-/* #7bc7ff /1* blue *1/ */
-/* #ff7b85 /1* crimson *1/ */
-/* #c7ff7b /1* green *1/ */
-/* #ff7bc7 /1* pink *1/ */
-
-/* #ffef2f /1* yellow strong *1/ */
-/* #2fa7ff /1* blue strong *1/ */
-/* #ff2f3f /1* crimson strong *1/ */
-/* #a7ff2f /1* green strong *1/ */
-/* #ff2fa7 /1* pink strong *1/ */
 .show-page .time {
   width: 180px;
   display: inline-block;
