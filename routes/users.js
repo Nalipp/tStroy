@@ -56,6 +56,7 @@ module.exports = function(app, passport) {
   app.get('/users/:id/', (req, res) => {
     const id = req.params.id;
     userRepo.getUser(id, result => {
+      result.data.description = 'hi';
       res.render('users/show', { user: result.data });
     });
   });

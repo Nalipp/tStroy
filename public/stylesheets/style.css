@@ -104,17 +104,41 @@ input::placeholder {
   display: inline-block;
   font-size: 12px;
 }
+.show-page .time .info {
+  display: inline-block;
+}
+.show-page .icons {
+  display: inline-block;
+}
+.show-page .icons span.edit, 
+.show-page .icons span.trash {
+  display: inline-block;
+  background: url('/images/icons.png');
+  background-size: 500px;
+  height: 20px;
+  width: 20px;;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: 8px;
+  filter: brightness(140%);
+}
+.show-page .time span.edit {
+  background-position: -109px 208px;
+}
+.show-page .time span.trash {
+  background-position: -294px 98px;
+}
 .show-page .tabs {
   display: inline-block;
   vertical-align: 10px;
 }
 .show-page .slip-wrapper {
   border-top: 6px solid #eee;
-  padding-top: 6px;
+  padding: 10px 0;
 }
 .show-page a {
   display: block;
-  padding-top: 10px;
+  padding: 6px 0;
 }
 .show-page p {
   color: #555;

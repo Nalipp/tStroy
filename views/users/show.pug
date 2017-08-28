@@ -10,14 +10,18 @@ block content
       for slip in user.slips
         .slip-wrapper
           .time 
-            p hours - #{slip.totalHours}
-            p date  - #{slip.formatedDate}
+            .info
+              p hours - #{slip.totalHours}
+              p date  - #{slip.formatedDate}
+            .icons
+              span.edit
+              span.trash
           .tabs
             p.tab.language= slip.language
             p.tab.sub-languages= slip.sub_languages
             p.tab.study-type= slip.study_type
-          a(href=slip.url target="_blank")= slip.resource_title
-          p.tab= slip.discription
+          a(href='/' + slip.url target="_blank")= slip.resource_title
+          p= slip.description
 
 
       a(href="/users/edit/" + user._id) edit
