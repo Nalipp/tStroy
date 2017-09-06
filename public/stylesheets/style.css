@@ -22,13 +22,53 @@ a, h1, h2, h3, h4, p {
 }
 a {
   color: #7bc7ff;
+  text-decoration: none;
 }
-
+.icons {
+  display: inline-block;
+}
+.icons span.edit, 
+.icons span.trash {
+  display: inline-block;
+  background: url('/images/icons.png');
+  background-size: 500px;
+  height: 20px;
+  width: 20px;;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: 8px;
+  filter: brightness(140%);
+}
+.icon-wrapper span.edit {
+  background-position: -109px 208px;
+}
+.icon-wrapper span.trash {
+  background-position: -294px 98px;
+}
+.icon-wrapper {
+  width: 180px;
+  display: inline-block;
+  font-size: 12px;
+}
+.icon-wrapper .info {
+  display: inline-block;
+}
+.form-wrapper {
+  width: 320px;
+  margin: auto;
+}
+.form-wrapper h1,
+.form-wrapper h2 {
+  margin-bottom: 30px;
+}
 .flash-message {
   position: relative;
   cursor: pointer;
 }
-
+.form-wrapper a {
+  display: inline-block;
+  padding: 10px 0 0 20px;
+}
 .flash-message::after {
   position: absolute;
   content: 'x';
@@ -71,6 +111,7 @@ input[type="submit"] {
   background: #fff;
   color: #7bc7ff;
   cursor: pointer;
+  margin-top: 30px;
 }
 textarea {
   height: 60px;
@@ -101,7 +142,6 @@ nav h4 {
   padding-left: 14px;
 }
 
-
 /* ************************************************** */
 /* index page */
 /* ************************************************** */
@@ -121,35 +161,6 @@ nav h4 {
 /* ************************************************** */
 /* user show page */
 /* ************************************************** */
-.show-page .time {
-  width: 180px;
-  display: inline-block;
-  font-size: 12px;
-}
-.show-page .time .info {
-  display: inline-block;
-}
-.show-page .icons {
-  display: inline-block;
-}
-.show-page .icons span.edit, 
-.show-page .icons span.trash {
-  display: inline-block;
-  background: url('/images/icons.png');
-  background-size: 500px;
-  height: 20px;
-  width: 20px;;
-  cursor: pointer;
-  margin-left: 10px;
-  vertical-align: 8px;
-  filter: brightness(140%);
-}
-.show-page .time span.edit {
-  background-position: -109px 208px;
-}
-.show-page .time span.trash {
-  background-position: -294px 98px;
-}
 .show-page .tabs {
   display: inline-block;
   vertical-align: 10px;
@@ -187,7 +198,39 @@ nav h4 {
 .show-page .study-type {
   background-color: #ff7bc7;
 }
+.show-page h1 {
+  display: inline-block;
+}
+.show-page a {
+  display: inline-block;
+}
+.show-page #new-slip {
+  border: 2px solid #3eff2f;
+  color: #3eff2f;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 16px;
+  vertical-align: 5px;
+}
 
+/* ************************************************** */
+/* user edit page */
+/* ************************************************** */
 
-
-
+.user-edit h2 {
+  display: inline-block; 
+  padding-bottom: 20px;
+}
+.user-edit form {
+  display: inline-block; 
+}
+.user-edit button[type="submit"] {
+  color: #ff7b85;
+  border: 2px solid #ff7b85;
+  border-radius: 6px;
+  background: #fff;
+  padding: 4px;
+  margin-left: 10px;
+  vertical-align: 6px;
+  cursor: pointer;
+}

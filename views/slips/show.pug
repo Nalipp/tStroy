@@ -4,12 +4,11 @@ block content
   h1 
     a(href="/slips") Slips
 
-  - if (slip) {
+if (slip) 
   p #{slip}
 
   a(href="/slips/edit/" + slip._id) edit
   form(method="Post" action="/slips/delete/" + slip._id) 
     button(type="submit") delete
-  - }
 
   

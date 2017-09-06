@@ -1,13 +1,18 @@
 extends ../layout
 
 block content
-  h1 
-    a(href="/users") Users
+  .user-edit
+    .form-wrapper
+      if(login)
+        h2 Edit : #{user.email}
+          form(method="Post" action="/users/delete/" + user._id) 
+            button(type="submit") delete
 
-  form(method='POST', action='/users/' + user._id)
-    label(for='email') Email
-    input(type='email', name='email' value=user.email)
-    input(type='submit')
+      if(login)
+        form(method='POST', action='/users/' + user._id)
+          label(for='email') Email
+          input(type='email', name='email' value=user.email)
+          input(type='submit')
 
-  a(href="/users/update_password") update password
+      a(href="/users/update_password") update password
 

@@ -2,14 +2,15 @@ extends ../layout
 
 block content
 
-  h1 Login
+  .form-wrapper
+    h1 Login
 
-  form#user-new(method='POST', action='/users/login')
-    label(for='email') Email
-    input#email(type='email', name='email')
-    label(for='password') Password
-    input#password(type='password', name='password')
-    input(type='submit')
+    form#user-new(method='POST', action='/users/login')
+      label(for='email') Email
+      input#email(type='email', name='email')
+      label(for='password') Password
+      input#password(type='password', name='password')
+      input(type='submit')
 
-    a(href="new") sign up
+      a(href="new") sign up
 

@@ -2,20 +2,26 @@ extends ../layout
 
 block content
   .show-page
-    h1 
-      a(href="/users") Users
 
     if(user) 
-      h2= user.email
+      if(login)
+        a(href="/users/edit/" + user._id)
+          h1= user.email
+          a(href="/users/" + user._id + "/slips/new" id="new-slip") new 
+
+      if(!login)
+        h1= user.email
+
       for slip in user.slips
         .slip-wrapper
-          .time 
+          .icon-wrapper 
             .info
               p hours - #{slip.totalHours}
               p date  - #{slip.formatedDate}
             .icons
-              span.edit
-              span.trash
+              if(login)
+                span.edit
+                span.trash
           .tabs
             p.tab.language= slip.language
             p.tab.sub-languages= slip.sub_languages
@@ -23,9 +29,5 @@ block content
           a(href='/' + slip.url target="_blank")= slip.resource_title
           p= slip.description
 
-
-      a(href="/users/edit/" + user._id) edit
-      form(method="Post" action="/users/delete/" + user._id) 
-        button(type="submit") delete
 
       

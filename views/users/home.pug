@@ -4,21 +4,6 @@ block content
 
   h4 Track and show off the history of your hard work
 
-  if (!user)
-    a(href="/users/login") Login
-    br
-    a(href="/users/new") sign up
-  if (user)
-    p You are currently logged in as #{ user.email }
+  a(href="/users") 
+    h4 look around
 
-    p
-      a(href="/users/logout") Logout
-  
-    p
-      a(href="/users/" + user._id) profile
-
-    p
-      a(href="/users/" + user._id + "/slips/new") new slip
-
-    p
-      a(href="/users/") all users
