@@ -123,6 +123,12 @@ input#url, textarea {
 input::placeholder {
   color: #bbb;
 }
+.share {
+  display: inline-block;
+}
+.padding20 {
+  padding: 20px;
+}
 
 /* ************************************************** */
 /* nav */
